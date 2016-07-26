@@ -1,0 +1,31 @@
+---
+- name: L2/L3 configuration on fabric switches
+  hosts: fabrics
+  gather_facts: no
+  vars:
+    ops_intf_admin_state: up
+    ops_debug: no
+  roles:
+    - { role: switch, tags: [ base ] }
+
+- name: L2/L3 configuration on spine switches
+  hosts: spines
+  gather_facts: no
+  vars:
+    ops_intf_admin_state: up
+    ops_debug: no
+  roles:
+    - { role: switch, tags: [ base ] }
+
+- name: L2/L3 configuration on leaf switches
+  hosts: leaves
+  gather_facts: no
+  vars:
+    ops_intf_admin_state: up
+    ops_debug: no
+  roles:
+    - { role: switch, tags: [ base ] }
+
+- include: bgp.yaml
+  tags: [ bgp ]
+
